@@ -51,10 +51,6 @@ public class AccountsControllerTest {
         TransfersController transfersController = Mockito.mock(TransfersController.class);
         AccountService accountService           = Mockito.mock(AccountService.class);
 
-        /*Mockito
-                .when(accountRepository.create(ArgumentMatchers.any(Account.class)))
-                .thenReturn(UUID.randomUUID().toString());*/
-
         Mockito
                 .when(accountRepository.findById(TEST_ACCOUNT_ID))
                 .thenReturn(Optional.of(TEST_ACCOUNT));
