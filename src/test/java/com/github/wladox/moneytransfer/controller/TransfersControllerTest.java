@@ -96,7 +96,11 @@ public class TransfersControllerTest {
 
     @Test
     public void givenValidTransfer_whenCreate_thenShouldReturnTransactionId() throws TransactionException {
-        Transfer testTransfer = Transfer.builder().build();
+        Transfer testTransfer = Transfer.builder()
+                .amount(BigDecimal.valueOf(100))
+                .from(TEST_ACCOUNT_A)
+                .to(TEST_ACCOUNT_B)
+                .build();
 
         doReturn(UUID.randomUUID().toString()).when(transferService).process(testTransfer);
 
