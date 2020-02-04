@@ -46,7 +46,7 @@
 ##### Show transfer history:
 `curl -X GET 'localhost:8080/api/transfers/log?accountId=test_account_123'`
 
-### :
-1. Run ./gradlew run
-2. Open http://localhost:8080/ping in your browser. If you see "PONG" then the application is ready.
+### How to run:
+1. Execute ./gradlew run
+2. Open http://localhost:8080/ping in your browser. If you see "PONG", then the application is ready.
 
