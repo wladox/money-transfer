@@ -27,7 +27,7 @@ public class InMemoryTransactionRepository implements TransactionRepository {
 
         LinkedList<TransferRecord> fromHistory = LOG.getOrDefault(from, new LinkedList<>());
         fromHistory.addFirst(t);
-        
+
         LinkedList<TransferRecord> toHistory = LOG.getOrDefault(to, new LinkedList<>());
         toHistory.addFirst(t);
 
