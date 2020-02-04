@@ -71,14 +71,14 @@ public class TransfersControllerTest {
                 .amount(BigDecimal.ONE)
                 .build();
 
-        doThrow(AccountNotFoundException.class).when(transferService).process(t);
+        doThrow(TransactionException.class).when(transferService).process(t);
 
         given()
                 .body(t)
                 .when()
                 .post(Server.ENDPOINT_TRANSFERS)
                 .then()
-                .statusCode(404);
+                .statusCode(400);
     }
 
     @Test

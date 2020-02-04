@@ -1,5 +1,6 @@
 package com.github.wladox.moneytransfer.service;
 
+import com.github.wladox.moneytransfer.Constants;
 import com.github.wladox.moneytransfer.exceptions.AccountNotFoundException;
 import com.github.wladox.moneytransfer.exceptions.TransactionException;
 import com.github.wladox.moneytransfer.model.Account;
@@ -26,13 +27,14 @@ public class MoneyTransferService {
         this.transactionRepository = txRepository;
     }
 
-    public Long process(Transfer tx) throws AccountNotFoundException, TransactionException {
+    public Long process(Transfer tx) throws TransactionException {
         synchronized (this) {
-            Optional<Account> from = accountRepository.findById(tx.getFrom());
-            Optional<Account> to = accountRepository.findById(tx.getTo());
+
+            Optional<Account> from  = accountRepository.findById(tx.getFrom());
+            Optional<Account> to    = accountRepository.findById(tx.getTo());
 
             if (from.isEmpty() || to.isEmpty()) {
-                throw new AccountNotFoundException("One of the accounts not exists");
+                throw new TransactionException(Constants.ERROR_ACCOUNT_NOT_FOUND);
             }
 
             BigDecimal amount  = tx.getAmount();
@@ -65,8 +67,12 @@ public class MoneyTransferService {
     }
 
     private static void validateTransfer(Account account, BigDecimal amount) throws TransactionException {
+        if (amount.compareTo(BigDecimal.ZERO) < 0) {
+            throw new TransactionException(Constants.ERROR_NEGATIVE_AMOUNT);
+        }
+
         if (account.getBalance().compareTo(amount) < 0) {
-            throw new TransactionException("Insufficient funds");
+            throw new TransactionException(Constants.ERROR_INSUFFICIENT_FUNDS);
         }
     }
 

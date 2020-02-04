@@ -11,10 +11,10 @@ import java.util.Date;
 @Data
 public class Transfer {
 
-    Long id;
-    String from;
-    String to;
-    BigDecimal amount;
-    Date created;
+    private Long id;
+    private String from;
+    private String to;
+    private BigDecimal amount;
+    private Date created;
 
 }

@@ -22,25 +22,21 @@ public class TransferRepositoryTest {
     private static final String ACCOUNT_A = "test_account_a";
     private static final String ACCOUNT_B = "test_account_b";
 
-    static final int NUM_OF_THREADS = 100;
-    static final int NUM_OF_ITERATIONS = 1000;
-    static final BigDecimal TRANSFER_AMOUNT = BigDecimal.valueOf(10);
+    private static final int NUM_OF_THREADS = 100;
+    private static final int NUM_OF_ITERATIONS = 1000;
+    private static final BigDecimal TRANSFER_AMOUNT = BigDecimal.valueOf(10);
 
-    AccountRepository accountRepository;
+    private AccountRepository accountRepository;
 
-    MoneyTransferService moneyTransferService;
+    private MoneyTransferService moneyTransferService;
 
 
     @Before
     public void setUp() {
 
         accountRepository = InMemoryAccountRepository.getInstance();
-        accountRepository.create(new Account()
-                .setNumber(ACCOUNT_A)
-                .setBalance(BigDecimal.valueOf(10000000)));
-        accountRepository.create(new Account()
-                .setNumber(ACCOUNT_B)
-                .setBalance(BigDecimal.valueOf(10000000)));
+        accountRepository.create(Account.builder().number(ACCOUNT_A).balance(BigDecimal.valueOf(10000000)).build());
+        accountRepository.create(Account.builder().number(ACCOUNT_B).balance(BigDecimal.valueOf(10000000)).build());
 
         moneyTransferService = new MoneyTransferService(
                 accountRepository,
@@ -78,7 +74,7 @@ public class TransferRepositoryTest {
 
                     try {
                         moneyTransferService.process(t);
-                    } catch (TransactionException | AccountNotFoundException e) {
+                    } catch (TransactionException e) {
                         e.printStackTrace();
                     }
                 }

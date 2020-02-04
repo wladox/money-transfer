@@ -9,7 +9,7 @@ import java.math.BigDecimal;
 @Data
 public class BalanceUpdateRequest {
 
-    BigDecimal amount;
-    BalanceOperation operation;
+    private BigDecimal amount;
+    private BalanceOperation operation;
 
 }

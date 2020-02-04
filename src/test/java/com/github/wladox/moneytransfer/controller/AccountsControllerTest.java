@@ -5,7 +5,10 @@ import com.github.wladox.moneytransfer.config.AppConfig;
 import com.github.wladox.moneytransfer.model.Account;
 import com.github.wladox.moneytransfer.repository.AccountRepository;
 import com.github.wladox.moneytransfer.service.AccountService;
-import org.junit.*;
+import org.junit.AfterClass;
+import org.junit.BeforeClass;
+import org.junit.Rule;
+import org.junit.Test;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnit;
 import org.mockito.junit.MockitoRule;
@@ -29,9 +32,10 @@ public class AccountsControllerTest {
     private static final Account TEST_ACCOUNT;
 
     static {
-        TEST_ACCOUNT = new Account()
-                .setId(TEST_ACCOUNT_ID)
-                .setNumber(TEST_ACCOUNT_NUMBER);
+        TEST_ACCOUNT = Account.builder()
+                .id(TEST_ACCOUNT_ID)
+                .number(TEST_ACCOUNT_NUMBER)
+                .build();
     }
 
 
@@ -76,9 +80,10 @@ public class AccountsControllerTest {
     @Test
     public void whenCreateNewAccount_ThenReturnNewAccountId() {
 
-        Account account = new Account()
-            .setNumber(TEST_ACCOUNT_NUMBER)
-            .setBalance(DEFAULT_BALANCE);
+        Account account = Account.builder()
+                .number(TEST_ACCOUNT_NUMBER)
+                .balance(DEFAULT_BALANCE)
+                .build();
 
         given()
             .body(account)

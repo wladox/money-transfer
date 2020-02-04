@@ -9,13 +9,13 @@
 
 ### API:
 
-| Endpoint      | HTTP Method        | Description  |
-| ------------- |:-------------:| -----:|
-| /api/accounts      | GET | returns a list of bank accounts |
-| /api/accounts/{accountId}      | GET      |   returns the account with id of {accountId} |
-| /api/accounts | POST      |    adds a new bank account and returns it with an id attributed added |
-| /api/transfers | POST | creates a new transaction to transfer money from an account to another account |
-| /api/transfers/:accountId/log | GET | returns all transactions related to a specific account |
+ Endpoint      | HTTP Method        | Description  
+ |------------- |:-------------:| -----|
+ /api/accounts              | GET   | returns a list of bank accounts 
+ /api/accounts/{accountId}  | GET   | returns the account with id of {accountId} 
+ /api/accounts              | POST  | adds a new bank account and returns it with an id attributed added 
+ /api/transfers             | POST  | creates a new transaction to transfer money from an account to another account 
+ /api/transfers/:accountId/log | GET   | returns all transactions related to a specific account 
 
 
 ### How to run:
