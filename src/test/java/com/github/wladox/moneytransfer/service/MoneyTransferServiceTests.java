@@ -151,7 +151,7 @@ public class MoneyTransferServiceTests {
         doReturn(Optional.of(sender)).when(accountRepository).findById(TEST_SENDER_NUMBER);
         doReturn(Optional.of(recipient)).when(accountRepository).findById(TEST_RECIPIENT_NUMBER);
 
-        Long txId = service.process(t);
+        String txId = service.process(t);
 
         assertThat(txId, is(notNullValue()));
         assertThat(sender.getBalance(), equalTo(BigDecimal.ZERO));

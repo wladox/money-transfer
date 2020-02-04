@@ -10,10 +10,7 @@ import com.github.wladox.moneytransfer.repository.AccountRepository;
 import com.github.wladox.moneytransfer.repository.TransactionRepository;
 
 import java.math.BigDecimal;
-import java.util.Collection;
-import java.util.Date;
-import java.util.Optional;
-import java.util.Random;
+import java.util.*;
 
 
 public class MoneyTransferService {
@@ -27,7 +24,7 @@ public class MoneyTransferService {
         this.transactionRepository = txRepository;
     }
 
-    public Long process(Transfer tx) throws TransactionException {
+    public String process(Transfer tx) throws TransactionException {
         synchronized (this) {
 
             Optional<Account> from  = accountRepository.findById(tx.getFrom());
@@ -49,7 +46,7 @@ public class MoneyTransferService {
             BigDecimal newBalanceTo = toBalance.add(amount);
             to.get().setBalance(newBalanceTo);
 
-            long txId = new Random().nextLong();
+            String txId = UUID.randomUUID().toString();
 
             transactionRepository.persist(TransferRecord.builder()
                     .id(txId)

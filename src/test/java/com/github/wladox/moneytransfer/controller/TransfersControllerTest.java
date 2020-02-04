@@ -17,6 +17,7 @@ import org.mockito.junit.MockitoRule;
 
 import java.math.BigDecimal;
 import java.util.Random;
+import java.util.UUID;
 
 import static io.restassured.RestAssured.given;
 import static org.hamcrest.MatcherAssert.assertThat;
@@ -96,10 +97,10 @@ public class TransfersControllerTest {
     }
 
     @Test
-    public void givenValidTransfer_whenCreate_thenShouldReturnTransactionId() throws AccountNotFoundException, TransactionException {
+    public void givenValidTransfer_whenCreate_thenShouldReturnTransactionId() throws TransactionException {
         Transfer testTransfer = Transfer.builder().build();
 
-        doReturn(new Random().nextLong()).when(transferService).process(testTransfer);
+        doReturn(UUID.randomUUID().toString()).when(transferService).process(testTransfer);
 
         String txId = given()
                 .body(testTransfer)

@@ -10,7 +10,7 @@ import java.util.Date;
 @Data
 public class TransferRecord {
 
-    private Long id;
+    private String id;
     private Date created;
     private Transfer transfer;
 

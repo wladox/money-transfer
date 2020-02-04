@@ -29,14 +29,14 @@ public class Server {
                                 .addPrefixPath("/ping", exchange -> exchange.getResponseSender().send("Pong"))
                                 .addPrefixPath(ENDPOINT_ACCOUNTS,
                                         Handlers.routing()
-                                                .get("", accountsController::getAll)
                                                 .post("", accountsController::create)
-                                                .put("/{accountId}", accountsController::update)
+                                                .get("", accountsController::getAll)
                                                 .get("/{accountId}", accountsController::get))
                                 .addPrefixPath(ENDPOINT_TRANSFERS,
                                         Handlers.routing()
                                                 .post("", transfersHandler::create)
-                                                .get("/log/{accountId}", transfersHandler::getAll))
+                                                .get("", transfersHandler::create)
+                                                .get("/log", transfersHandler::getByNumber))
                 ).addExceptionHandler(ApiException.class, ExceptionHandler::handleApiException)
                         .addExceptionHandler(AccountCreationException.class, ExceptionHandler::handleCreationException)
                         .addExceptionHandler(AccountNotFoundException.class, ExceptionHandler::handleNotFoundException)

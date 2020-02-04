@@ -1,6 +1,7 @@
 package com.github.wladox.moneytransfer.controller;
 
 import com.github.wladox.moneytransfer.exceptions.AccountNotFoundException;
+import com.github.wladox.moneytransfer.exceptions.ApiException;
 import com.github.wladox.moneytransfer.exceptions.TransactionException;
 import com.github.wladox.moneytransfer.model.Transfer;
 import com.github.wladox.moneytransfer.model.TransferRecord;
@@ -18,16 +19,19 @@ public class TransfersController {
         this.transferService = service;
     }
 
-    public void create(HttpServerExchange exchange) throws TransactionException, AccountNotFoundException {
+    public void create(HttpServerExchange exchange) throws TransactionException {
         Transfer transfer = Helper.getFrom(exchange, Transfer.class);
-        Long txId = transferService.process(transfer);
+        String txId = transferService.process(transfer);
         exchange.setStatusCode(201);
         Helper.sendResponseBody(exchange, txId);
     }
 
-    public void getAll(HttpServerExchange exchange) {
-        String  id = Helper.getAccountId(exchange);
-        Collection<TransferRecord> history = transferService.showHistory(id);
+    public void getByNumber(HttpServerExchange exchange) throws ApiException {
+        String accountId = Helper.getQueryParam(exchange, "accountId");
+        if (accountId == null) {
+            throw new ApiException(400, "Missing request parameter 'accountId'");
+        }
+        Collection<TransferRecord> history = transferService.showHistory(accountId);
         exchange.setStatusCode(200);
         Helper.sendResponseBody(exchange, history);
     }

@@ -5,6 +5,7 @@ import io.undertow.server.HttpServerExchange;
 import io.undertow.util.PathTemplateMatch;
 
 import java.nio.charset.Charset;
+import java.util.Deque;
 
 public class Helper {
 
@@ -30,6 +31,14 @@ public class Helper {
     public static String getAccountId(HttpServerExchange exchange) {
         PathTemplateMatch pathMatch = exchange.getAttachment(PathTemplateMatch.ATTACHMENT_KEY);
         return pathMatch.getParameters().get("accountId");
+    }
+
+    public static String getQueryParam(HttpServerExchange exchange, String paramName) {
+        Deque<String> params = exchange.getQueryParameters().getOrDefault(paramName, null);
+        if (params != null) {
+            return params.getFirst();
+        }
+        return null;
     }
 
     /**
