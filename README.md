@@ -19,23 +19,23 @@
 ### Examples
 
 ##### Create new account:
-`curl -X POST 'localhost:8080/api/accounts/' --header 'Content-Type: application/json' \
+`curl --request POST 'localhost:8080/api/accounts/' --header 'Content-Type: application/json' \
 --data-raw '{
 	"number": "test_account_123",
 	"balance": 400
 }'`
 
 ##### Get all accounts:
-`curl -X GET 'localhost:8080/api/accounts'`
+`curl --request GET 'localhost:8080/api/accounts'`
 
 ##### Get single accounts:
-`curl -X GET 'localhost:8080/api/accounts/test_account_123'`
+`curl --request GET 'localhost:8080/api/accounts/test_account_123'`
 
 ##### Get single accounts:
-`curl -X GET 'localhost:8080/api/accounts/test_account_123'`
+`curl --request GET 'localhost:8080/api/accounts/test_account_123'`
 
 ##### Create new transfer:
-`curl -X POST 'localhost:8080/api/transfers/' \
+`curl --request POST 'localhost:8080/api/transfers/' \
 --header 'Content-Type: application/json' \
 --data-raw '{
 	"from": "test_account_234",
@@ -44,7 +44,7 @@
 }'`
 
 ##### Show transfer history:
-`curl -X GET 'localhost:8080/api/transfers/log?accountId=test_account_123'`
+`curl --request GET 'localhost:8080/api/transfers/log?accountId=test_account_123'`
 
 ### How to run:
 1. Execute ./gradlew run

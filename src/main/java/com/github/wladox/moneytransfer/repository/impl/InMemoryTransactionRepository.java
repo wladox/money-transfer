@@ -24,11 +24,15 @@ public class InMemoryTransactionRepository implements TransactionRepository {
     synchronized public void persist(TransferRecord t) {
         String from = t.getTransfer().getFrom();
         String to = t.getTransfer().getTo();
+
         LinkedList<TransferRecord> fromHistory = LOG.getOrDefault(from, new LinkedList<>());
         fromHistory.addFirst(t);
+        
         LinkedList<TransferRecord> toHistory = LOG.getOrDefault(to, new LinkedList<>());
-        fromHistory.addFirst(t);
+        toHistory.addFirst(t);
+
         LOG.put(from, fromHistory);
+
         LOG.put(to, toHistory);
     }
 
