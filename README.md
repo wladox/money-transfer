@@ -15,10 +15,8 @@
 * /api/transfers/:accountId/log GET - returns all transactions related to a specific account
 
 ### How to run:
-1. Run ./gradlew clean build
-2. Go to build/distributions and unpack interview-backend-<VERSION>-SNAPSHOT.tar or interview-backend-<VERSION>-SNAPSHOT.zip
-3. Go to interview-backend-<VERSION>-SNAPSHOT/bin and run there ./interview-backend or interview-backend.bat. You can run it with optional parameters: ./interview-backend <REDIS_HOST> <REDIS_PORT> <REST_HOST>
-4. Open http://localhost:8080/ in your browse. The application is ready for usage.
+1. Run ./gradlew run
+2. Open http://localhost:8080/ping in your browser. If you see "PONG" then the application is ready.
 
 Components:
 * request dispatcher
