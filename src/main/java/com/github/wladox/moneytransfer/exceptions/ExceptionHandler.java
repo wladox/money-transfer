@@ -1,6 +1,7 @@
 package com.github.wladox.moneytransfer.exceptions;
 
 
+import com.github.wladox.moneytransfer.model.ErrorResponse;
 import com.github.wladox.moneytransfer.util.Helper;
 import io.undertow.server.HttpServerExchange;
 

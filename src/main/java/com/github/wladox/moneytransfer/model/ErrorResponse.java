@@ -1,4 +1,4 @@
-package com.github.wladox.moneytransfer.exceptions;
+package com.github.wladox.moneytransfer.model;
 
 import lombok.Value;
 
